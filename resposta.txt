@@ -1,1 +1,85 @@
 Coloque aqui todas as respostas das práticas indicadas no README.md
+
+
+1.1: Qual a sua rede e máscara? A rede é 172.18.0.0 e a mascara é 255.255.0.0
+
+1.2: Qual o seu roteador padrão (default gateway)? 172.18.0.1
+
+1.3: Quantas rotas configuradas tem seu computador? 2 rotas configuradas.
+
+2.1: IP da interface de rede: 172.18.0.2
+2.2: Rede e máscara: 172.18.0.0/16
+2.3: Nome da interface de rede principal: eth0
+
+3:
+nslookup www.google.com = 172.217.29.196
+nslookup www.whitehouse.gov = 192.0.66.51
+nslookup www.rnp.br = 104.18.26.22 , 104.18.27.22
+nslookup www.ufpb.br = 150.165.254.52
+
+4.1.1:
+PING 127.0.0.1 (127.0.0.1): 56 data bytes
+64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.035 ms
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.032 ms
+round-trip min/avg/max/stddev = 0.031/0.034/0.052/0.000 ms
+
+4.1.2:
+PING 172.18.0.2 (172.18.0.2): 56 data bytes
+64 bytes from 172.18.0.2: icmp_seq=0 ttl=64 time=0.046 ms
+64 bytes from 172.18.0.2: icmp_seq=1 ttl=64 time=0.034 ms
+round-trip min/avg/max/stddev = 0.033/0.036/0.046/0.000 ms
+
+4.2.1:
+PING nginx.bbn.ufpb.br (150.165.254.52): 56 data bytes
+64 bytes from 150.165.254.52: icmp_seq=0 ttl=63 time=26.294 ms
+64 bytes from 150.165.254.52: icmp_seq=1 ttl=63 time=24.804 ms
+round-trip min/avg/max/stddev = 24.804/25.571/26.294/0.566 ms
+
+4.2.2:
+PING me-ycpi-cf-www.g06.yahoodns.net (200.152.173.205): 56 data bytes
+64 bytes from 200.152.173.205: icmp_seq=0 ttl=63 time=169.819 ms
+64 bytes from 200.152.173.205: icmp_seq=1 ttl=63 time=169.199 ms
+round-trip min/avg/max/stddev = 169.199/169.461/169.819/0.226 ms
+
+4.2.3:
+PING www.brasil.gov.br (170.246.255.242): 56 data bytes
+64 bytes from 170.246.255.242: icmp_seq=0 ttl=63 time=77.764 ms
+64 bytes from 170.246.255.242: icmp_seq=1 ttl=63 time=77.060 ms
+round-trip min/avg/max/stddev = 76.891/77.214/77.764/0.295 ms
+
+Pergunta: Quais os tempos de resposta para cada um dos sites. Algum estava inacessível, qual mensagem apareceu?
+
+Resposta: Somente o www.dce.ufpb.br estava inacessível, apareceu a mensagem "ping: unknown host"
+
+4.3: Parece que o que pode influênciar é o dominio em que o site está. Sites com o final .br ou .gov tiveram um tempo de resposta mais rápido.
+
+5.1: Pode estar havendo  bloqueio de pacotes ICMP por firewalls ou configurações de rede.
+
+5.2: Não. Isso pode ser uma medida de seguranção escolhida pela empresa.
+
+6.1:
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.11:32977        0.0.0.0:*               LISTEN      -
+udp        0      0 127.0.0.11:43136        0.0.0.0:*                           -
+
+6.2:
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+default         172.18.0.1      0.0.0.0         UG        0 0          0 eth0
+172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 eth0
+
+7.1:
+Sim o servidor respondeu e está ativo. Essa foi a resposta dele:
+root@def8c67eefb6:/# telnet www.ufpb.br 80
+Trying 150.165.254.52...
+Connected to www.ufpb.br.
+
+7.2:
+Tive uma resposta de falha:
+root@def8c67eefb6:/# telnet www.dce.ufpb.br 21
+Server lookup failure:  www.dce.ufpb.br:21, Name or service not known
+
+8:
+O mtr fornece informações em tempo real sobre a rota, latência dos pacotes e esses dados podem ajudar a identificar onde há
+ perda de pacotes ou aumento de latência, facilitando o diagnóstico de problemas na rede.
